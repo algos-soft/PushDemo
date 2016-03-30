@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import java.io.IOException;
+
 
 public class MainActivity extends Activity {
 
@@ -37,6 +41,7 @@ public class MainActivity extends Activity {
         bDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                unregister();
                 getPrefs().edit().remove(Prefs.GCM_REGISTRATION_TOKEN).commit();
                 showToken();
             }
@@ -58,6 +63,18 @@ public class MainActivity extends Activity {
     private void launchRegistration(){
         GCMRegisterTask task = new GCMRegisterTask(this);
         task.execute();
+    }
+
+
+    private void unregister(){
+        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(getBaseContext());
+        try {
+            gcm.unregister();
+        }
+        catch (IOException e) {
+            System.out.println("Error Message: " + e.getMessage());
+        }
+
     }
 
 //    public String getRegistrationToken() {
