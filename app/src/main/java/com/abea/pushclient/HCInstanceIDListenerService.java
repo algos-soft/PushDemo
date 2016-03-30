@@ -24,6 +24,7 @@ public class HCInstanceIDListenerService extends InstanceIDListenerService {
 
     private static final String TAG="GCMREG";
 
+
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. This call is initiated by the
@@ -33,12 +34,12 @@ public class HCInstanceIDListenerService extends InstanceIDListenerService {
     @Override
     public void onTokenRefresh() {
 
-        // remove old token form preferences
-        Prefs.getEditor().putString(Prefs.GCM_REGISTRATION_TOKEN, null).apply();
-
-        // obtain a new token and send it to the server
-        GCMRegisterTask task = new GCMRegisterTask();
-        task.execute();
+//        // remove old token form preferences
+//        Prefs.getEditor().putString(Prefs.GCM_REGISTRATION_TOKEN, null).apply();
+//
+//        // obtain a new token and send it to the server
+//        GCMRegisterTask task = new GCMRegisterTask();
+//        task.execute();
 
         Log.d(TAG, "GCM Token refresh received");
 

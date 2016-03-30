@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,18 +22,23 @@ import java.io.IOException;
 public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
 
     private static final String TAG="GCMREG";
+    private MainActivity activity;
+
+    public GCMRegisterTask(MainActivity activity) {
+        this.activity=activity;
+    }
 
     @Override
     protected String doInBackground(Void... params) {
         String msg = "";
         try {
             Context context = PushClientApp.getContext();
-            String senderId= context.getString(R.string.gcm_defaultSenderId);
+            String senderId= "115110381874";
             InstanceID instanceID = InstanceID.getInstance(context);
             String regToken = instanceID.getToken(senderId,  GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
             // Persist the regID - no need to register again.
-            Prefs.getEditor().putString(Prefs.GCM_REGISTRATION_TOKEN, regToken).apply();
+            activity.getPrefs().edit().putString(Prefs.GCM_REGISTRATION_TOKEN, regToken).commit();
 
             // No need to send the ID to our server here - it is sent along with each Login request
 
@@ -54,6 +60,7 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
                 Toast toast= Toast.makeText(act, msg, Toast.LENGTH_LONG);
                 toast.show();
                 Log.d(TAG, "Successfully registered to GCM");
+                activity.showToken();
             }else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(act);
                 builder.setPositiveButton("Continua", new DialogInterface.OnClickListener() {

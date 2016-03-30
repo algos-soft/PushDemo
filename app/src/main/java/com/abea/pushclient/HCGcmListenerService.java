@@ -44,17 +44,13 @@ public class HCGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
-        if (Prefs.isRiceviNotifiche()) {
+        String messagetype = data.getString("messagetype");
+        String timestamp = data.getString("timestamp");
+        String message = data.getString("message");
+        Log.d(TAG, "Message received from: " + from + ", type: " + messagetype + ", message: " + message);
 
-            String messagetype = data.getString("messagetype");
-            String timestamp = data.getString("timestamp");
-            String message = data.getString("message");
-            Log.d(TAG, "Message received from: " + from + ", type: " + messagetype + ", message: " + message);
-
-            // invia una notifica al sistema
-            sendNotification(data);
-
-        }
+        // invia una notifica al sistema
+        sendNotification(data);
     }
 
     /**
