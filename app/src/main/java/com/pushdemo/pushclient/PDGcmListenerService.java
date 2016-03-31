@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -51,6 +52,7 @@ public class PDGcmListenerService extends GcmListenerService {
 
         // invia una notifica al sistema
         sendNotification(data);
+
     }
 
     /**

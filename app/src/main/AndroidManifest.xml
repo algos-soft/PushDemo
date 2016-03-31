@@ -31,7 +31,7 @@
 
 
 
-        <!-- [START gcm_receiver] -->
+        <!-- [BEGIN gcm_receiver] -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -48,7 +48,7 @@
         </receiver>
         <!-- [END gcm_receiver] -->
 
-        <!-- [START gcm_listener] -->
+        <!-- [BEGIN gcm_listener] -->
         <service
             android:name=".PDGcmListenerService"
             android:exported="false" >
@@ -59,7 +59,7 @@
         <!-- [END gcm_listener] -->
 
 
-        <!-- [START instanceId_listener] -->
+        <!-- [BEGIN instanceId_listener] -->
         <service
             android:name=".PDInstanceIDListenerService"
             android:exported="false" >

@@ -36,10 +36,14 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
             InstanceID instanceID = InstanceID.getInstance(context);
             String regToken = instanceID.getToken(senderId,  GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
-            // Persist the regID - no need to register again.
+            // Persist the token - no need to register again.
             activity.getPrefs().edit().putString(Prefs.GCM_REGISTRATION_TOKEN, regToken).commit();
 
-            // send the ID to our server here
+
+            // send the token to your server here
+            //....
+
+
 
         } catch (IOException ex) {
             msg = "Error : " + ex.getMessage();
