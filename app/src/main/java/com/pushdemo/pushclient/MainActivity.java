@@ -40,10 +40,19 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 unregister();
-                getPrefs().edit().remove(Prefs.GCM_REGISTRATION_TOKEN).commit();
-                showToken();
             }
         });
+
+        Button bManual=(Button)findViewById(R.id.manualnotif);
+        bManual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("message", "Test notification");
+                ((PushClientApp)getApplication()).sendNotification(data);
+            }
+        });
+
 
 
     }
@@ -65,13 +74,9 @@ public class MainActivity extends Activity {
 
 
     private void unregister(){
-        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(getBaseContext());
-        try {
-            gcm.unregister();
-        }
-        catch (IOException e) {
-            System.out.println("Error Message: " + e.getMessage());
-        }
+        GCMUnregisterTask task = new GCMUnregisterTask(this);
+        task.execute();
+
 
     }
 

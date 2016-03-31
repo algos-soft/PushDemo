@@ -16,16 +16,26 @@
 
     <Button
         android:id="@+id/registergcm"
+        android:width="200dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ottieni token GCM"
-        android:layout_marginBottom="10dp"/>
+        android:text="Register to GCM"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/deletegcm"
+        android:width="200dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancella token GCM"/>
+        android:text="Unregister from GCM"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/manualnotif"
+        android:width="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual notification"/>
 
 
 </LinearLayout>

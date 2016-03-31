@@ -14,16 +14,16 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 /**
- * Registers the application with GCM servers asynchronously.
+ * Unregisters the application from GCM servers, asynchronously.
  * <p>
- * Stores the registration ID in the application's shared preferences.
+ * deletes the registration ID from the application's shared preferences.
  */
-public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
+public class GCMUnregisterTask extends AsyncTask<Void, Void, String> {
 
-    private static final String TAG="GCMREG";
+    private static final String TAG="GCMUNREG";
     private MainActivity activity;
 
-    public GCMRegisterTask(MainActivity activity) {
+    public GCMUnregisterTask(MainActivity activity) {
         this.activity=activity;
     }
 
@@ -31,19 +31,9 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         String msg = "";
         try {
-            Context context = PushClientApp.getContext();
-            String senderId= "115110381874";
-            InstanceID instanceID = InstanceID.getInstance(context);
-            String regToken = instanceID.getToken(senderId,  GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-
-            // Persist the token - no need to register again.
-            activity.getPrefs().edit().putString(Prefs.GCM_REGISTRATION_TOKEN, regToken).commit();
-
-
-            // send the token to your server here
-            //....
-
-
+            GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(activity);
+            gcm.unregister();
+            activity.getPrefs().edit().remove(Prefs.GCM_REGISTRATION_TOKEN).commit();
 
         } catch (IOException ex) {
             msg = "Error : " + ex.getMessage();
@@ -59,11 +49,12 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
         if(act!=null){
 
             if(s.equals("")){
-                String msg="Registrazione GCM effettuata.";
+                String msg="Deregistrazione GCM effettuata.";
                 Toast toast= Toast.makeText(act, msg, Toast.LENGTH_LONG);
                 toast.show();
-                Log.d(TAG, "Successfully registered to GCM");
+                Log.d(TAG, "Successfully unregistered from GCM");
                 activity.showToken();
+
             }else{
                 AlertDialog.Builder builder = new AlertDialog.Builder(act);
                 builder.setPositiveButton("Continua", new DialogInterface.OnClickListener() {
@@ -72,15 +63,16 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
                         dialog.dismiss();
                     }
                 });
-                builder.setTitle("Registrazione GCM fallita");
-                builder.setMessage("Non verranno ricevute notifiche.\nErrore: " + s);
+                builder.setTitle("Deregistrazione GCM fallita");
+                builder.setMessage("Errore: " + s);
                 builder.show();
-                Log.d(TAG, "GCM registration failed: " + s);
+                Log.d(TAG, "GCM unregistration failed: " + s);
 
             }
 
         }
     }
+
 
 
 }

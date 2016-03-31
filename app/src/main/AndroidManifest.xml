@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pushdemo.pushclient" >
+    package="com.pushdemo.pushclient">
 
-    <!--see https://developers.google.com/cloud-messaging/android/client-->
+    <!-- see https://developers.google.com/cloud-messaging/android/client -->
 
     <uses-permission android:name="com.pushdemo.pushclient.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-
 
     <application
         android:name=".PushClientApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,30 +24,28 @@
             </intent-filter>
         </activity>
 
-
-
-
         <!-- [BEGIN gcm_receiver] -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.pushdemo.pushclient" />
             </intent-filter>
 
-            <!--If you want to support pre-4.4 KitKat devices, add the following -->
-            <!--action to the intent filter declaration for the receiver:-->
+            <!-- If you want to support pre-4.4 KitKat devices, add the following -->
+            <!-- action to the intent filter declaration for the receiver: -->
             <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
         </receiver>
         <!-- [END gcm_receiver] -->
+
 
         <!-- [BEGIN gcm_listener] -->
         <service
             android:name=".PDGcmListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -62,14 +56,16 @@
         <!-- [BEGIN instanceId_listener] -->
         <service
             android:name=".PDInstanceIDListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <!-- [END instanceId_listener] -->
 
-
+        <activity
+            android:name=".PushActivity"
+            android:label="@string/title_activity_push"></activity>
     </application>
 
 </manifest>

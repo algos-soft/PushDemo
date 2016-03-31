@@ -51,52 +51,54 @@ public class PDGcmListenerService extends GcmListenerService {
         Log.d(TAG, "Message received from: " + from + ", type: " + messagetype + ", message: " + message);
 
         // invia una notifica al sistema
-        sendNotification(data);
-
-    }
-
-    /**
-     * Create and show a simple notification containing the received GCM message.
-     */
-    private void sendNotification(Bundle data) {
-        String messagetype = data.getString("messagetype");
-
-        if (messagetype.equals("alarm")) {
-            Intent intent = new Intent();
-            intent.setClass(this, MainActivity.class);
-            //intent.putExtra("siteid", site.getId());
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
-
-            String msg = data.getString("message");
-            Uri defaultSoundUri = Lib.resourceToUri(R.raw.surprise);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setContentTitle("Push Notification")
-                    .setContentText(msg)
-                    .setAutoCancel(true)
-                    .setSound(defaultSoundUri)
-                    .setContentIntent(pendingIntent);
-
-            Notification mNotification = notificationBuilder.build();
-            mNotification.flags |= Notification.FLAG_INSISTENT;
-
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            notificationManager.notify(0, mNotification);
-
-            // dopo la notifica sveglia il device
-            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            PowerManager.WakeLock wakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), getClass().getSimpleName());
-            wakeLock.acquire();
-
-
-        }
+        //sendNotification(data);
+        ((PushClientApp)getApplication()).sendNotification(data);
 
 
     }
+
+//    /**
+//     * Create and show a simple notification containing the received GCM message.
+//     */
+//    private void sendNotification(Bundle data) {
+//        String messagetype = data.getString("messagetype");
+//
+//        if (messagetype.equals("alarm")) {
+//            Intent intent = new Intent();
+//            intent.setClass(this, PushActivity.class);
+//            //intent.putExtra("siteid", site.getId());
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+//
+//
+//            String msg = data.getString("message");
+//            Uri defaultSoundUri = Lib.resourceToUri(R.raw.surprise);
+//            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+//                    .setSmallIcon(R.drawable.ic_launcher)
+//                    .setContentTitle("Push Notification")
+//                    .setContentText(msg)
+//                    .setAutoCancel(true)
+//                    .setSound(defaultSoundUri)
+//                    .setContentIntent(pendingIntent);
+//
+//            Notification mNotification = notificationBuilder.build();
+//            mNotification.flags |= Notification.FLAG_INSISTENT;
+//
+//            NotificationManager notificationManager =
+//                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//            notificationManager.notify(0, mNotification);
+//
+//            // dopo la notifica sveglia il device
+//            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+//            PowerManager.WakeLock wakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), getClass().getSimpleName());
+//            wakeLock.acquire();
+//
+//
+//        }
+//
+//
+//    }
 
 
 }
