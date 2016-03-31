@@ -39,7 +39,7 @@ public class GCMRegisterTask extends AsyncTask<Void, Void, String> {
             // Persist the regID - no need to register again.
             activity.getPrefs().edit().putString(Prefs.GCM_REGISTRATION_TOKEN, regToken).commit();
 
-            // No need to send the ID to our server here - it is sent along with each Login request
+            // send the ID to our server here
 
         } catch (IOException ex) {
             msg = "Error : " + ex.getMessage();

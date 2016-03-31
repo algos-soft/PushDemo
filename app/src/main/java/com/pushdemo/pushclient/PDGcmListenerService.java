@@ -30,7 +30,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 
-public class HCGcmListenerService extends GcmListenerService {
+public class PDGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "HCGcmListenerService";
 

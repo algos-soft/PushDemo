@@ -20,7 +20,7 @@ import android.util.Log;
 
 import com.google.android.gms.iid.InstanceIDListenerService;
 
-public class HCInstanceIDListenerService extends InstanceIDListenerService {
+public class PDInstanceIDListenerService extends InstanceIDListenerService {
 
     private static final String TAG="GCMREG";
 
