@@ -70,7 +70,7 @@ public class PDGcmListenerService extends GcmListenerService {
 
 
             String msg = data.getString("message");
-            Uri defaultSoundUri = Lib.resourceToUri(R.raw.calling);
+            Uri defaultSoundUri = Lib.resourceToUri(R.raw.surprise);
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                     .setSmallIcon(R.drawable.ic_launcher)
                     .setContentTitle("Push Notification")
