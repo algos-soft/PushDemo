@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.abea.pushclient;
+package com.pushdemo.pushclient;
 
 import android.util.Log;
 

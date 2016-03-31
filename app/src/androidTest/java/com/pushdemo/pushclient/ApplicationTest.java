@@ -1,4 +1,4 @@
-package com.abea.pushclient;
+package com.pushdemo.pushclient;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

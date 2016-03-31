@@ -1,7 +1,4 @@
-package com.abea.pushclient;
-
-import android.content.Context;
-import android.content.SharedPreferences;
+package com.pushdemo.pushclient;
 
 /**
  * Libreria per l'accesso alle preferenze della applicazione.

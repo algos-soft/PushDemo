@@ -1,23 +1,10 @@
-package com.abea.pushclient;
+package com.pushdemo.pushclient;
 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
-import android.os.PowerManager;
 import android.provider.Settings;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.Surface;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
